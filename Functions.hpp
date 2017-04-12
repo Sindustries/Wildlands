@@ -16,4 +16,8 @@ class WLD_Core {
 		class getSettings {};
 		class updateProgressBar {};
 	};
+	class startup {
+		file = "core\startup";
+		class loadout {};
+	};
 };
