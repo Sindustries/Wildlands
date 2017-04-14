@@ -1,9 +1,9 @@
 onLoadName = "Wildlands";
-OnLoadMission = "Tagline Tagline";
+OnLoadMission = "Who will you be?";
 dev = "Sinbane";
 author = "Sinbane";
 //briefingName = "briefingname";
-overviewText = "overviewText";
+overviewText = "";
 //overviewPicture = "\a3\Missions_F_Beta\data\img\showcase_commanding_I_overview_ca.paa";
 overviewPicture = "";
 LoadScreen = "";
@@ -21,16 +21,28 @@ respawnDialog = 0;
 respawnDelay = 999999;
 respawnTemplates[] = {""};
 disabledAI = 1;
-disableChannels[]={2,4,6};
-joinUnassigned = 1;
+//0 = Global 1 = Side 2 = Command 3 = Group 4 = Vehicle 5 = Direct 6 = System
+disableChannels[] = {{0, true, true},{1, false, true},{2, true, true},{6, true, true}};
+saving = 0;
+briefing = 0;
 enableDebugConsole = 1;
 
+//REVIVE
+ReviveMode = 1;                         //0: disabled, 1: enabled, 2: controlled by player attributes
+ReviveUnconsciousStateMode = 0;         //0: basic, 1: advanced, 2: realistic
+ReviveRequiredTrait = 0;                //0: none, 1: medic trait is required
+ReviveRequiredItems = 2;                //0: none, 1: medkit, 2: medkit or first aid kit
+ReviveRequiredItemsFakConsumed = 1;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
+ReviveDelay = 6;                        //time needed to revive someone (in secs)
+ReviveMedicSpeedMultiplier = 2;         //speed multiplier for revive performed by medic
+ReviveForceRespawnDelay = 60;            //time needed to perform force respawn (in secs)
+ReviveBleedOutDelay = 120;              //unconscious state duration (in secs)
+
+#include "cfgMaster.hpp"
 #include "params.hpp"
-#include "CfgMaster.hpp"
-#include "sounds.hpp"
-#include "debriefing.hpp"
+
 #include "GUI\defines.hpp"
-#include "SINadmin\SIN_admin.hpp"
+#include "GUI\atm.hpp"
 
 class CfgFunctions {
     #include "Functions.hpp"
