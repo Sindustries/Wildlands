@@ -32,7 +32,7 @@ waitUntil {WLD_serverReady isEqualTo true};
 diag_log "-- SERVER READY, PREPARING.. --";
 //-----------------------------------
 //-MAIN
-[] call WLD_fnc_loadPlayerSpawn;
+//[] call WLD_fnc_loadPlayerSpawn;
 //Find starting location -- TO BE REFINED
 //_startPos = [[0,0,0],0,999999] call SIN_fnc_findPos;
 //player setPos _startPos;
@@ -40,8 +40,15 @@ diag_log "-- SERVER READY, PREPARING.. --";
 //-
 
 //-----------------------------------
-//-
-
+//-OPERATOR SELECTOR
+spawnChosen = false;
+while {!spawnChosen} do {
+	[] call WLD_fnc_startupMenu;
+	waitUntil {dialog};
+	waitUntil {!dialog};
+};
+spawnChosen = nil;
+diag_log "-- PLAYER SPAWNED --";
 //-----------------------------------
 //-CUSTOM KEYS AND ADDACTIONS
 [] spawn {

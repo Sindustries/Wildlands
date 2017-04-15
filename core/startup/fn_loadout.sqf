@@ -20,27 +20,27 @@ removeGoggles player;
 
 //SQUAD LEADER
 if (player isKindof "B_Soldier_SL_F") then {
-	player forceAddUniform "U_I_C_Soldier_Bandit_3_F";
-	player addHeadgear "H_Cap_tan";
+	player forceAddUniform "";
+	player addHeadgear "";
 
 };
 
 //GRENADIER
 if (player isKindof "B_Soldier_GL_F") then {
-	player forceAddUniform "U_I_C_Soldier_Bandit_2_F";
-	player addHeadgear "H_Bandanna_khk";
+	player forceAddUniform "";
+	player addHeadgear "";
 };
 
 //MARKSMAN
 if (player isKindof "B_Soldier_M_F") then {
-	player forceAddUniform "U_I_C_Soldier_Bandit_5_F";
-	player addHeadgear "H_Booniehat_khk";
+	player forceAddUniform "";
+	player addHeadgear "";
 };
 
 //MEDIC
 if (player isKindof "B_Medic_F") then {
-	player forceAddUniform "U_BG_Guerilla2_1";
-	player addHeadgear "H_Cap_blk";
+	player forceAddUniform "";
+	player addHeadgear "";
 };
 
 player linkItem "itemMap";

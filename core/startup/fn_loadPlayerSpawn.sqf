@@ -3,11 +3,39 @@
     Author: Sinbane
 
     Description:
+    Gives player starting gear based on whatever they choose
 */
+#define Btn1 88881
+#define Btn2 88882
+#define Btn3 88883
+#define Btn4 88884
+#define Btn5 88885
+#define Btn6 88886
+#define Btn7 88887
+#define Btn8 88888
+
+private["_display","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6","_Btn7","_Btn8"];
+disableSerialization;
+
+//-----------------------------------
+
+_display = findDisplay 1222;
+_Btn1 = _display displayCtrl Btn1;
+_Btn2 = _display displayCtrl Btn2;
+_Btn3 = _display displayCtrl Btn3;
+_Btn4 = _display displayCtrl Btn4;
+_Btn5 = _display displayCtrl Btn5;
+_Btn6 = _display displayCtrl Btn6;
+_Btn7 = _display displayCtrl Btn7;
+_Btn8 = _display displayCtrl Btn8;
+{
+	_x ctrlEnable false;
+} forEach [_Btn1,_Btn2,_Btn3,_Btn4,_Btn5,_Btn6,_Btn7,_Btn8];
+
 //-----------------------------------
 private ["_option","_spawned","_location","_spawnableHouses","_houseList","_buildingPos","_house","_housePos","_grp","_unit","_unitType","_side","_container","_car","_locale","_housing","_spawnPos","_crate","_cratePos","_carPosFound","_add","_nearRoads","_road","_connectedRoads","_dir","_spawncar"];
 //-----------------------------------
-_container = "plp_ct_TravelBagBlue";
+_option = _this select 0;
 _cars = [
 "Jonzie_30CSL",
 "Jonzie_Escalade",
@@ -25,8 +53,35 @@ _cars = [
 "Jonzie_Corolla"
 ];
 _car = selectRandom _cars;
-_locale = WLD_cities;
-_housing = WLD_tier2Housing;_housing;
+_side = resistance;
+_container = "plp_ct_TravelBagBlue";
+_locale = WLD_villages;
+_housing = WLD_tier1Housing;
+//-----------------------------------
+if (_option isEqualTo 1) then {
+	_unitType = "B_Soldier_SL_F";
+};
+if (_option isEqualTo 2) then {
+	_unitType = "B_Soldier_GL_F";
+};
+if (_option isEqualTo 3) then {
+	_unitType = "B_Soldier_M_F";
+};
+if (_option isEqualTo 4) then {
+	_unitType = "B_Medic_F";
+};
+if (_option isEqualTo 5) then {
+	_unitType = "B_Soldier_SL_F";
+};
+if (_option isEqualTo 6) then {
+	_unitType = "B_Soldier_GL_F";
+};
+if (_option isEqualTo 7) then {
+	_unitType = "B_Soldier_M_F";
+};
+if (_option isEqualTo 8) then {
+	_unitType = "B_Medic_F";
+};
 //-----------------------------------
 diag_log "-- FINDING SPAWN BUILDING.. --";
 _spawned = false;
@@ -116,7 +171,8 @@ if (!_spawned) then {
 	[_spawncar] call WLD_fnc_emptyVeh;
 };
 [_crate] call WLD_fnc_emptyVeh;
-player setPos _spawnPos;
+_grp = createGroup _side;
+_unit = _grp createUnit [_unitType, _spawnPos, [], 0, "NONE"];
 if (!(isNil "_house")) then {
 	_house setVariable ['bis_disabled_Door_1',1,true];
 	_house setVariable ["WLD_owner",(getPlayerUID player)];
@@ -130,5 +186,5 @@ if (!(isNil "_location")) then {
 } else {
 	diag_log format["-- SPAWN LOCATION: %1 --",(getPos player)];
 };
-[_crate] call WLD_fnc_loadOptions;
+[_option,_unit,_crate] call WLD_fnc_loadOptions;
 //-----------------------------------

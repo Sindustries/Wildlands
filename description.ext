@@ -43,6 +43,7 @@ ReviveBleedOutDelay = 120;              //unconscious state duration (in secs)
 
 #include "GUI\defines.hpp"
 #include "GUI\atm.hpp"
+#include "GUI\startup.hpp"
 
 class CfgFunctions {
     #include "Functions.hpp"

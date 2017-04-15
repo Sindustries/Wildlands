@@ -25,6 +25,7 @@ class WLD_Core {
 		class loadOptions {};
 		class loadout {};
 		class loadPlayerSpawn {};
+		class startupMenu {};
 		class tpw_air {};
 		class tpw_animals {};
 		class tpw_boats {};
