@@ -22,6 +22,7 @@ diag_log "----------------------------------------------------------------------
 //-PLAYER VARIABLES
 player setVariable ["WLD_bank",(["defaultCash"] call WLD_fnc_getSetting),true];
 player setVariable ["WLD_cash",0,true];
+player setVariable ["WLD_stashSpawned",false,true];
 //-----------------------------------
 WLD_safehouses = [];
 WLD_clientMarkers = [];

@@ -77,7 +77,7 @@ if (_option isEqualTo 3) then {
 if (_option isEqualTo 4) then {
 	player setFace "PersianHead_A3_03";
 	player setSpeaker "male04gre";
-	player forceAddUniform "tacs_Uniform_TShirt_JP_BS_LP_BB";
+	player forceAddUniform "EF_HM_B2";
 	player addHeadgear "H_Cap_blk";
 	_weapons = [["SMG_05_F",1],["hgun_P07_F",1]];
 	_magazines = [["30Rnd_9x21_Mag_SMG_02",3],["16Rnd_9x21_Mag",2]];
@@ -88,7 +88,7 @@ if (_option isEqualTo 4) then {
 		["V_PlateCarrier1_blk",1],
 		["ItemRadio",1]
 	];
-	_crate addBackPackCargoGlobal ["B_AssaultPack_mcamo",1];
+	_crate addBackPackCargoGlobal ["tacs_Backpack_AssaultExpanded_Black",1];
 };
 if (_option isEqualTo 5) then {
 	player setFace "max_female1";
@@ -173,6 +173,8 @@ if ((count _items) > 0) then {
 		_crate addItemCargoGlobal [(_x select 0),(_x select 1)];
 	} forEach _items;
 };
+WLD_stash = _crate;
+WLD_stashPos = (getPos _crate);
 //-----------------------------------
 diag_log "-- CLASS CHOSEN --";
 spawnChosen = true;

@@ -15,14 +15,9 @@ _alt = _this select 4;
 _handled = false;
 //-----------------------------------
 switch (_code) do {
-	//Y-menu
-	/*case 21: {
-		COMING SOON ?
-	};*/
-
 	//H - Holster
 	case 35: {
-        if (!_shift && _ctrl && !_alt && !(currentWeapon player isEqualTo "")) then {
+        if (_shift && !_ctrl && !_alt && !(currentWeapon player isEqualTo "")) then {
 			_handled = true;
             curWep = currentWeapon player;
             player action ["SwitchWeapon", player, player, 100];
@@ -37,7 +32,7 @@ switch (_code) do {
 
 	//O - Earplugs
     case 24: {
-        if (!_shift && _ctrl && !_alt) then {
+        if (_shift && !_ctrl && !_alt) then {
             if (soundVolume != 1) then {
 				_handled = true;
                 1 fadeSound 1;
@@ -93,6 +88,27 @@ switch (_code) do {
 			};
         };
     };
+    //Windows Key
+	case 219: {
+		private ["_veh","_crate"];
+		if (isNull objectParent player) then {
+			_veh = cursorObject;
+		} else {
+			_veh = vehicle player;
+		};
+	  	if (_veh isKindOf "House_F" && _veh in WLD_safehouses && player distance _veh < 10) then {
+	  		if ((player getVariable ["WLD_stashSpawned",false]) isEqualTo false) then {
+	  			player setVariable ["WLD_stashSpawned",true,true];
+				WLD_stash setPos (getPos player);
+				WLD_stash hideObjectGlobal false;
+			} else {
+				player setVariable ["WLD_stashSpawned",false,true];
+				WLD_stash setPos ([[0,0,0],0,999999,0,2] call SIN_fnc_findPos);
+				WLD_stash hideObjectGlobal true;
+			};
+		};
+		_handled = true;
+	};
 };
 
 _handled;
