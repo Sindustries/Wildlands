@@ -7,12 +7,15 @@
 */
 private["_balance","_cash","_value"];
 _value = parseNumber(ctrlText 144414);
+_balance = player getVariable ["WLD_bank",0];
+_cash = player getVariable ["WLD_cash",0];
+_balance = [_balance,2] call BIS_fnc_cutDecimals;
+_cash = [_cash,2] call BIS_fnc_cutDecimals;
+_value = [_value,2] call BIS_fnc_cutDecimals;
+
 if (_value > 999999) exitWith {hint "GBC Error: You can't deposit this much.";};
 if (_value < 0) exitWith {};
 if (_value > _cash) exitWith {hint "GBC Error: You don't have enough cash."};
-
-_balance = player getVariable ["WLD_bank",0];
-_cash = player getVariable ["WLD_cash",0];
 
 _cash = _cash - _value;
 _balance = _balance + _value;

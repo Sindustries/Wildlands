@@ -14,6 +14,8 @@ _ctrl = _this select 3;
 _alt = _this select 4;
 _handled = false;
 //-----------------------------------
+_pumps = ["Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F"];
+//-----------------------------------
 switch (_code) do {
 	//H - Holster
 	case 35: {
@@ -90,17 +92,19 @@ switch (_code) do {
     };
     //Windows Key
 	case 219: {
-		private ["_veh","_crate"];
+		private ["_veh"];
 		if (isNull objectParent player) then {
 			_veh = cursorObject;
 		} else {
 			_veh = vehicle player;
 		};
+		//Is it a house?
 	  	if (_veh isKindOf "House_F" && _veh in WLD_safehouses && player distance _veh < 10) then {
 	  		if ((player getVariable ["WLD_stashSpawned",false]) isEqualTo false) then {
 	  			player setVariable ["WLD_stashSpawned",true,true];
-				WLD_stash setPos (getPos player);
 				WLD_stash hideObjectGlobal false;
+				WLD_stash attachTo [player, [0, 2.7, 1.1]];
+				detach WLD_stash;
 			} else {
 				player setVariable ["WLD_stashSpawned",false,true];
 				WLD_stash setPos ([[0,0,0],0,999999,0,2] call SIN_fnc_findPos);

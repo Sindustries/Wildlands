@@ -4,6 +4,12 @@
 
     Description:
     Informs player of changes to their bank balance
+    [_value,0] call WLD_fnc_bankMessage;
+    0 = deposit
+    1 = withdraw
+    2 = interest payment
+    3 = sent payment
+    4 = received payment
 */
 private ["_balance","_hour","_min","_time"];
 params [
@@ -51,4 +57,25 @@ switch (_type) do {
 		<t size='0.8' align='center'>Your new balance is: $%3</t>",
 		_time,_value,_balance];
 	};
+	case 3: {
+		hint parseText format["
+		<t align='center' underline='true' color='#ffff00'>GLOBAL BANKING<br/>
+		CORPORATION</t><br/>
+		<t align='center'>ACCOUNT UPDATE<br/></t>
+		<t size='0.9' align='center'>@ %1<br/></t>
+		<t size='0.8' align='center'>You just sent a payment of $%2</t>
+		<t size='0.8' align='center'>Your new balance is: $%3</t>",
+		_time,_value,_balance];
+	};
+	case 4: {
+		hint parseText format["
+		<t align='center' underline='true' color='#ffff00'>GLOBAL BANKING<br/>
+		CORPORATION</t><br/>
+		<t align='center'>ACCOUNT UPDATE<br/></t>
+		<t size='0.9' align='center'>@ %1<br/></t>
+		<t size='0.8' align='center'>You just received a payment of $%2</t>
+		<t size='0.8' align='center'>Your new balance is: $%3</t>",
+		_time,_value,_balance];
+	};
+
 };

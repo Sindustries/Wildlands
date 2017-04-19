@@ -37,7 +37,6 @@ if (_option isEqualTo 1) then {
 		["Binocular",1],
 		["ItemGPS",1],
 		["FirstAidKit",3],
-		["V_BandollierB_cbr",1],
 		["ItemRadio",1]
 	];
 	_crate addBackPackCargoGlobal ["B_AssaultPack_rgr",1];
@@ -53,7 +52,6 @@ if (_option isEqualTo 2) then {
 		["Binocular",1],
 		["ItemGPS",1],
 		["FirstAidKit",3],
-		["V_HarnessO_brn",1],
 		["ItemRadio",1]
 	];
 	_crate addBackPackCargoGlobal ["B_AssaultPack_cbr",1];
@@ -68,11 +66,11 @@ if (_option isEqualTo 3) then {
 	_items = [
 		["ItemGPS",1],
 		["FirstAidKit",3],
-		["V_TacChestrig_grn_F",1],
 		["Rangefinder",1],
 		["ItemRadio",1],
 		["optic_KHS_old",1]
 	];
+	_crate addBackPackCargoGlobal ["tacs_Backpack_AssaultExpanded_Black",1];
 };
 if (_option isEqualTo 4) then {
 	player setFace "PersianHead_A3_03";
@@ -85,7 +83,6 @@ if (_option isEqualTo 4) then {
 		["Binocular",1],
 		["ItemGPS",1],
 		["Medikit",1],
-		["V_PlateCarrier1_blk",1],
 		["ItemRadio",1]
 	];
 	_crate addBackPackCargoGlobal ["tacs_Backpack_AssaultExpanded_Black",1];
@@ -101,7 +98,6 @@ if (_option isEqualTo 5) then {
 		["Binocular",1],
 		["ItemGPS",1],
 		["FirstAidKit",3],
-		["V_BandollierB_cbr",1],
 		["ItemRadio",1]
 	];
 	_crate addBackPackCargoGlobal ["B_AssaultPack_rgr",1];
@@ -117,7 +113,6 @@ if (_option isEqualTo 6) then {
 		["Binocular",1],
 		["ItemGPS",1],
 		["FirstAidKit",3],
-		["V_HarnessO_brn",1],
 		["ItemRadio",1]
 	];
 	_crate addBackPackCargoGlobal ["B_AssaultPack_cbr",1];
@@ -132,11 +127,11 @@ if (_option isEqualTo 7) then {
 	_items = [
 		["ItemGPS",1],
 		["FirstAidKit",3],
-		["V_TacChestrig_grn_F",1],
 		["Rangefinder",1],
 		["ItemRadio",1],
 		["optic_KHS_old",1]
 	];
+	_crate addBackPackCargoGlobal ["tacs_Backpack_AssaultExpanded_Black",1];
 };
 if (_option isEqualTo 8) then {
 	player setFace "max_female7";
@@ -149,7 +144,6 @@ if (_option isEqualTo 8) then {
 		["Binocular",1],
 		["ItemGPS",1],
 		["Medikit",1],
-		["V_PlateCarrier1_blk",1],
 		["ItemRadio",1]
 	];
 	_crate addBackPackCargoGlobal ["B_AssaultPack_mcamo",1];

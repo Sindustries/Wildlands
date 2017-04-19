@@ -41,21 +41,17 @@ _cars = [
 "Jonzie_Escalade",
 "Jonzie_Datsun_510",
 "Jonzie_Datsun_Z432",
-"Jonzie_Viper",
 "Jonzie_Raptor",
-"Jonzie_XB",
-"Jonzie_Transit",
 "Jonzie_VE",
 "Jonzie_Ute",
 "Jonzie_Ceed",
-"Jonzie_Quattroporte",
-"Jonzie_STI",
+"Jonzie_Galant",
 "Jonzie_Corolla"
 ];
 _car = selectRandom _cars;
 _side = resistance;
-_container = "plp_ct_TravelBagBlue";
-_locale = WLD_villages;
+_container = "plp_ct_HighSecSmallBlack";
+_locale = (WLD_villages + WLD_towns);
 _housing = WLD_tier1Housing;
 //-----------------------------------
 if (_option isEqualTo 1) then {
@@ -121,15 +117,16 @@ while {!_spawned} do {
 				_marker setMarkerShapeLocal "ICON";
 				_marker setMarkerTypeLocal "loc_Tourism";
 				_marker setMarkerColorLocal "ColorBlufor";
-				_marker setMarkerSizeLocal [0.75,0.75];
+				_marker setMarkerSizeLocal [1,1];
 				_marker setMarkerAlphaLocal 1;
 				_marker setMarkerTextLocal "Safehouse";
 				WLD_clientMarkers pushBack _marker;
 				_playerPosFound = true;
 			};
 			_spawned = true;
+			private ["_carPosFound","_add","_carpos","_dir"];
 			_carPosFound = false;
-			_add = 20;
+			_add = 5;
 			while {!_carPosFound} do {
 				_nearRoads = _house nearRoads _add;
 				if (count _nearRoads > 0) then {
@@ -138,14 +135,19 @@ while {!_spawned} do {
 					_connectedRoads = roadsConnectedTo _road;
 					_dir = [_road, (_connectedRoads select 0)] call BIS_fnc_DirTo;
 					_carpos = (getPos _road);
-					_spawncar = _car createVehicle [0,0,0];
-					_spawncar setPos _carpos;
-					_spawncar setDir _dir;
-					[_spawncar] call WLD_fnc_emptyVeh;
 				} else {
-					_add = _add + 20;;
+					_add = _add + 5;
+				};
+				if (_add >= 50) then {
+					_carPosFound = true;
+					_carPos = [(getPos _house),6,30,6] call SIN_fnc_findPos;
+					_dir = [_carPos, (getPos _house)] call BIS_fnc_dirTo;
 				};
 			};
+			_spawncar = _car createVehicle [0,0,0];
+			_spawncar setPos _carpos;
+			_spawncar setDir _dir;
+			[_spawncar] call WLD_fnc_emptyVeh;
 		};
 	};
 };

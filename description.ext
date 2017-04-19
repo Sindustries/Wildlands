@@ -42,6 +42,7 @@ ReviveBleedOutDelay = 120;              //unconscious state duration (in secs)
 #include "params.hpp"
 
 #include "GUI\defines.hpp"
+#include "SINadmin\SIN_admin.hpp"
 #include "GUI\atm.hpp"
 #include "GUI\startup.hpp"
 

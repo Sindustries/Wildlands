@@ -6,13 +6,23 @@
     Opens the ATM menu
 */
 //-----------------------------------
+
+disableSerialization;
 #define Btn1 144412
 #define Btn2 144413
 #define Text1 144411
 #define Input1 144414
 
 private["_display","_Btn1","_Btn2","_Text1","_Input1"];
-disableSerialization;
+
+_balance = player getVariable ["WLD_bank",0];
+_cash = player getVariable ["WLD_cash",0];
+if (_cash < 0) then {_cash = 0};
+if (_balance < 0) then {_balance = 0};
+_balance = [_balance,2] call BIS_fnc_cutDecimals;
+_cash = [_cash,2] call BIS_fnc_cutDecimals;
+player setVariable ["WLD_bank",_balance];
+player setVariable ["WLD_cash",_cash];
 
 //-----------------------------------
 if (!dialog) then {
@@ -37,5 +47,5 @@ CASH BALANCE:<br/>
 $%2<br/></t>
 <br/>
 <t align='center' size='0.6'>Thank you for choosing GBC for your banking needs.</t>",
-(player getVariable ["WLD_bank",0]),(player getVariable ["WLD_cash",0])];
+_balance,_cash];
 //-----------------------------------

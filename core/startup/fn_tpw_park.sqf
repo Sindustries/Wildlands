@@ -5,12 +5,12 @@ Author: tpw
 Date: 20160712
 Requires: CBA A3, tpw_core.sqf
 Compatibility: SP, MP client
-	
-Disclaimer: Feel free to use and modify this code, on the proviso that you post back changes and improvements so that everyone can benefit from them, and acknowledge the original author (tpw) in any derivative works. 
 
-To use: 
+Disclaimer: Feel free to use and modify this code, on the proviso that you post back changes and improvements so that everyone can benefit from them, and acknowledge the original author (tpw) in any derivative works.
+
+To use:
 1 - Save this script into your mission directory as eg tpw_park.sqf
-2 - Call it with 0 = [25,300,150,20,10] execvm "tpw_park.sqf"; where 25 = percentage of houses to spawn cars near (0 = no cars, >50 inadvisable), 300 = radius (m) around player to scan for houses to spawn cars, 150 = radius (m) around player beyond which cars are hidden, 20 = player must be closer than this (m) to a car for it to have its simulation enabled, 10 = maximum cars to spawn regardless of settings 
+2 - Call it with 0 = [25,300,150,20,10] execvm "tpw_park.sqf"; where 25 = percentage of houses to spawn cars near (0 = no cars, >50 inadvisable), 300 = radius (m) around player to scan for houses to spawn cars, 150 = radius (m) around player beyond which cars are hidden, 20 = player must be closer than this (m) to a car for it to have its simulation enabled, 10 = maximum cars to spawn regardless of settings
 
 THIS SCRIPT WON'T RUN ON DEDICATED SERVERS
 */
@@ -33,18 +33,9 @@ tpw_park_active = true; // global enable/disable
 tpw_park_cararray = []; // Array of parked cars
 tpw_park_oldpos = [0,0,0];
 
-tpw_park_civcarlist = [
-"C_Hatchback_01_F",
-"C_Hatchback_01_rallye_F",
-"C_Hatchback_01_sportF",
-"C_Offroad_01_F",
-"C_Offroad_01_repair_F",
-"C_Offroad_01_sport_F",
-"C_SUV_01_F",
-"C_SUV_01_sport_F"
-];
+tpw_park_civcarlist = WLD_parkVehicles;
 // ADD TANOAN CARS IF AVAILABLE
-if (isclass (configfile/"CfgWeapons"/"u_c_man_casual_1_f")) then 
+if (isclass (configfile/"CfgWeapons"/"u_c_man_casual_1_f")) then
 	{
 	tpw_park_civcarlist = tpw_park_civcarlist + ["C_Offroad_02_unarmed_F"];
 	};
@@ -53,12 +44,12 @@ if (isclass (configfile/"CfgWeapons"/"u_c_man_casual_1_f")) then
 	{
 	private ["_cfg"];
 	_cfg = (configFile >> "CfgVehicles");
-	for "_i" from 0 to ((count _cfg) -1) do 
+	for "_i" from 0 to ((count _cfg) -1) do
 		{
-		if (isClass ((_cfg select _i) ) ) then 
+		if (isClass ((_cfg select _i) ) ) then
 			{
 			_cfgName = configName (_cfg select _i);
-			if ( (_cfgName isKindOf "car") && {getNumber ((_cfg select _i) >> "scope") == 2} && {[_x,str _cfgname] call BIS_fnc_inString}) then 
+			if ( (_cfgName isKindOf "car") && {getNumber ((_cfg select _i) >> "scope") == 2} && {[_x,str _cfgname] call BIS_fnc_inString}) then
 				{
 				tpw_park_civcarlist pushback _cfgname;
 				};
@@ -69,14 +60,14 @@ if (isclass (configfile/"CfgWeapons"/"u_c_man_casual_1_f")) then
 // SCAN HOUSES AND ASSIGN PARKED CARS
 [] spawn
 	{
-	while {true} do 
+	while {true} do
 		{
 		private ["_houses","_housestring","_uninhab","_house","_car","_nearroads","_road","_connected","_conroad1","_conroad2","_roaddir","_housedir","_roadpos","_posx","_posy","_spawncar","_spawnpos"];
 		if (tpw_park_oldpos distance position player > (tpw_park_createdist / 2)) then // only if player has moved more than 1/2 a spawn radius
 			{
 			tpw_park_oldpos = position player;
-			
-			// Scan for habitable houses 
+
+			// Scan for habitable houses
 			_houses = [tpw_park_createdist] call tpw_core_fnc_houses;
 
 			for "_i" from 0 to (count _houses - 1) do
@@ -86,17 +77,17 @@ if (isclass (configfile/"CfgWeapons"/"u_c_man_casual_1_f")) then
 				if (_house getvariable ["tpw_park_assigned",0] == 0) then // if house has not been assigned
 					{
 					if (random 100 < tpw_park_perc) then // percentage
-						{	
+						{
 						_car = tpw_park_civcarlist  select (floor (random (count tpw_park_civcarlist )));
 						_nearRoads = _house nearRoads 30;	// if there is a road near the house
 						if(count _nearRoads > 0) then
 							{
 							_road = _nearRoads select 0;
 							// No parked cars nearby
-							if (count (_road nearentities ["car_f",30]) == 0) then 
+							if (count (_road nearentities ["car_f",30]) == 0) then
 								{
 								_connected = roadsConnectedTo _road;
-								if (count _connected > 1) then 
+								if (count _connected > 1) then
 									{
 									_conroad1 = _connected select 0;
 									_conroad2 = _connected select 1;
@@ -115,30 +106,30 @@ if (isclass (configfile/"CfgWeapons"/"u_c_man_casual_1_f")) then
 									_spawncar setvariable ["tpw_park_house",_house];
 									_house setvariable ["tpw_park_assigned",1];
 									tpw_park_cararray set [count tpw_park_cararray, _spawncar];
-									[_spawncar] spawn 
+									[_spawncar] spawn
 										{
 										sleep 1;
-										(_this select 0) enablesimulation false; 
+										(_this select 0) enablesimulation false;
 										(_this select 0) allowdamage true;
 										};
-									};	
+									};
 								};
 							};
-						sleep 0.5;		
+						sleep 0.5;
 						}
 					else
 						{
 						_house setvariable ["tpw_park_assigned",1];
-						}				
+						}
 					};
-					 
-				if (count tpw_park_cararray > tpw_park_max) exitwith {};		
+
+				if (count tpw_park_cararray > tpw_park_max) exitwith {};
 				} ;
-			};	
-		sleep 11.33;		
-		};	
-	};	
-	
+			};
+		sleep 11.33;
+		};
+	};
+
 // SHOW HIDE PARKED CARS AS APPROPRIATE
 while {true} do
 	{
@@ -147,17 +138,17 @@ while {true} do
 		for "_i" from 0 to (count tpw_park_cararray - 1) do
 			{
 			_car = tpw_park_cararray select _i;
-			if (_car distance player < tpw_park_hidedist) then 
+			if (_car distance player < tpw_park_hidedist) then
 				{
-				_car hideobject false; // unhide near car 		
+				_car hideobject false; // unhide near car
 				// Enable simulation only when people nearby
 				if (driver _car in units group player || player distance _car < tpw_park_simdist || damage _car > 0.2) then
 					{
-					_car enablesimulation true; 
+					_car enablesimulation true;
 					}
 				else
 					{
-					_car enablesimulation false; 
+					_car enablesimulation false;
 					};
 				}
 			else
@@ -165,15 +156,15 @@ while {true} do
 				_car hideobject true; // hide far car
 				};
 
-			// delete distant car and unassign its house	
-			if (_car distance player > tpw_park_createdist) then 
+			// delete distant car and unassign its house
+			if (_car distance player > tpw_park_createdist) then
 				{
 				(_car getvariable "tpw_park_house") setvariable ["tpw_park_assigned",0];
 				deletevehicle _car;
 				tpw_park_cararray set [_i,-1];
 				};
 			};
-		tpw_park_cararray = tpw_park_cararray - [-1];		
-		sleep 12.34;		
+		tpw_park_cararray = tpw_park_cararray - [-1];
+		sleep 12.34;
 		};
-	};		
+	};

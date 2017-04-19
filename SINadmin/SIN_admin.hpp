@@ -210,14 +210,14 @@ class sinUNUSED5btn: RscButton
 class sinUNUSED6btn: RscButton
 {
 	idc = 1611;
-	text = "UNUSED"; //--- ToDo: Localize;
+	text = "RUN TEST CODE"; //--- ToDo: Localize;
 	x = 0.407187 * safezoneW + safezoneX;
 	y = 0.61 * safezoneH + safezoneY;
 	w = 0.0721875 * safezoneW;
 	h = 0.022 * safezoneH;
 	tooltip = "UNUSED"; //--- ToDo: Localize;
 	sizeEX = "0.016 / (getResolution select 5)";
-	action = "";
+	action = "[] spawn SIN_fnc_testCode";
 };
 ////////////////////////////////////////////////////////
 // GUI EDITOR OUTPUT END

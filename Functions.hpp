@@ -2,9 +2,11 @@ class SIN {
 	tag = "SIN";
 	class core {
 		file = "core\sin";
+		class adminInit {};
 		class checkPos {};
 		class checkDist {};
 		class findPos {};
+		class testCode {};
 	};
 }
 
@@ -13,9 +15,12 @@ class WLD_Core {
 	class core {
 		file = "core\core";
 		class emptyVeh {};
+		class fuelPump {};
+		class fuelStation {};
 		class getSetting {};
 		class getSettings {};
 		class updateProgressBar {};
+		class weather {};
 	};
 	class startup {
 		file = "core\startup";
@@ -38,7 +43,12 @@ class WLD_Core {
 		file = "core\stash";
 		class bank {};
 		class bankDeposit {};
+		class bankInterest {};
 		class bankMessage {};
 		class bankWithdraw {};
+	};
+	class support {
+		file = "core\support";
+		class taxiLandCiv {};
 	};
 };
