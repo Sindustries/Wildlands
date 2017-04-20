@@ -38,9 +38,11 @@ switch (_code) do {
             if (soundVolume != 1) then {
 				_handled = true;
                 1 fadeSound 1;
+                [1,"SOUND RETURNED TO NORMAL"] spawn WLD_fnc_message;
             } else {
 				_handled = true;
                 1 fadeSound 0.25;
+                [1,"SOUND LOWERED"] spawn WLD_fnc_message;
             };
         };
     };
