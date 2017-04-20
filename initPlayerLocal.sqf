@@ -13,7 +13,6 @@ player allowDamage false;
 player enableStamina false;
 //-----------------------------------
 waitUntil {time > 0};
-["Preload"] call BIS_fnc_arsenal;
 cutText ["WAITING FOR SERVER, PLEASE WAIT", "BLACK FADED", 999];
 waitUntil {WLD_serverReady isEqualTo true};
 cutText ["", "BLACK FADED", 999];
