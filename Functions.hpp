@@ -19,6 +19,7 @@ class WLD_Core {
 		class fuelStation {};
 		class getSetting {};
 		class getSettings {};
+		class message {};
 		class updateProgressBar {};
 		class weather {};
 	};

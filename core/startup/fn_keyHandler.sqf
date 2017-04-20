@@ -62,12 +62,12 @@ switch (_code) do {
 					for "_i" from 0 to _doors do {
 						_house setVariable [format["bis_disabled_Door_%1",_i],0,false];
 					};
-					hint "House Unlocked";
+					[1,"HOUSE UNLOCKED"] spawn WLD_fnc_message;
 				} else {
 					for "_i" from 0 to _doors do {
 						_house setVariable [format["bis_disabled_Door_%1",_i],1,true];
 					};
-					hint "House Locked";
+					[1,"HOUSE LOCKED"] spawn WLD_fnc_message;
 				};
 				_handled = true;
             };
@@ -78,11 +78,11 @@ switch (_code) do {
 						_locked = locked _veh;
 						if (_locked isEqualTo 0) then {
 							_veh lock 2;
-							hint "Vehicle Locked";
+							[1,"VEHICLE LOCKED"] spawn WLD_fnc_message;
 						};
 						if (_locked isEqualTo 2) then {
 							_veh lock 0;
-							hint "Vehicle Unlocked";
+							[1,"VEHICLE UNLOCKED"] spawn WLD_fnc_message;
 						};
 						_handled = true;
 					};
@@ -105,10 +105,12 @@ switch (_code) do {
 				WLD_stash hideObjectGlobal false;
 				WLD_stash attachTo [player, [0, 2.7, 1.1]];
 				detach WLD_stash;
+				[1,"STASH SPAWNED"] spawn WLD_fnc_message;
 			} else {
 				player setVariable ["WLD_stashSpawned",false,true];
 				WLD_stash setPos ([[0,0,0],0,999999,0,2] call SIN_fnc_findPos);
 				WLD_stash hideObjectGlobal true;
+				[1,"STASH DESPAWNED"] spawn WLD_fnc_message;
 			};
 		};
 		_handled = true;

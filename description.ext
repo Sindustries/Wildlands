@@ -52,6 +52,8 @@ class CfgFunctions {
 
 class RscTitles {
 
+	#include "GUI\status.hpp"
+
 	class Default
 	{
 		idd = -1;
